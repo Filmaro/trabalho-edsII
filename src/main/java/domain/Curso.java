@@ -1,5 +1,6 @@
 package domain;
 
+import exception.MediaInvalidaException;
 import lombok.Data;
 
 import java.util.UUID;
@@ -21,13 +22,9 @@ public class Curso {
         this.nota = nota;
     }
 
-    public boolean isCursoFinalizado() {
-        return nota != -1;
-    }
-
     public boolean isReprovado(){
-        if (!isCursoFinalizado())
-            throw new IllegalArgumentException();
+        if (nota < 0 || nota > 10)
+            throw new MediaInvalidaException(String.format("Média %.2f está fora do intervalo entre 0 e 10", nota));
 
         return nota < 7;
     }

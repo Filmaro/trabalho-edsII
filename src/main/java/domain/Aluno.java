@@ -1,5 +1,7 @@
 package domain;
 
+import exception.AlunoReprovadoException;
+
 import java.util.*;
 
 public class Aluno {
@@ -10,11 +12,12 @@ public class Aluno {
     private int qtdCursosDisponiveis;
 
     public Aluno(String nome, Curso cursoInicial) {
-        this.cursosAdicionados = new HashMap<>();
-        addCurso(cursoInicial);
-
+        this.qtdCursosDisponiveis = 1;
         this.nome = nome;
         this.tipoAssinatura = TipoAssinaturaEnum.BASICO;
+
+        this.cursosAdicionados = new HashMap<>();
+        addCurso(cursoInicial);
     }
 
     public void addCurso(Curso curso) {
@@ -27,15 +30,12 @@ public class Aluno {
 
     public void finalizarCurso(Curso curso) {
         if (curso.isReprovado())
-            throw new IllegalArgumentException();
+            throw new AlunoReprovadoException(String.format("A média do aluno %s ficou abaixo de 7 no curso %s, e foi reprovado", nome, curso.getNome()));
 
         qtdCursosDisponiveis += 3;
-
-        if (cursosCompletados() == 12)
-            tipoAssinatura = TipoAssinaturaEnum.PREMIUM;
     }
 
-    public long cursosCompletados() {
-        return cursosAdicionados.values().stream().filter(Curso::isCursoFinalizado).count();
+    public int getQtdCursosDisponiveis() {
+        return this.qtdCursosDisponiveis;
     }
 }
