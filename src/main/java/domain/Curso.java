@@ -18,10 +18,6 @@ public class Curso {
         this.nota = -1;
     }
 
-    public void completarCurso(double nota) {
-        this.nota = nota;
-    }
-
     public boolean isReprovado(){
         if (nota < 0 || nota > 10)
             throw new MediaInvalidaException(String.format("Média %.2f está fora do intervalo entre 0 e 10", nota));

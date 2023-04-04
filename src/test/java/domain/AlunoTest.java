@@ -22,7 +22,7 @@ class AlunoTest {
 
         assertEquals(0, aluno.getQtdCursosDisponiveis());
 
-        curso.completarCurso(7.0);
+        curso.setNota(7.0);
         aluno.finalizarCurso(curso);
 
         assertEquals(3, aluno.getQtdCursosDisponiveis());
@@ -38,7 +38,7 @@ class AlunoTest {
 
         assertEquals(0, aluno.getQtdCursosDisponiveis());
 
-        curso.completarCurso(6.9);
+        curso.setNota(6.9);
         
         assertThrows(AlunoReprovadoException.class, () -> aluno.finalizarCurso(curso));
         assertEquals(0, aluno.getQtdCursosDisponiveis());
@@ -52,7 +52,7 @@ class AlunoTest {
         Curso curso = new Curso("Fisica");
         Aluno aluno = new Aluno("Claudio", curso);
 
-        curso.completarCurso(-10);
+        curso.setNota(-10);
 
         assertThrows(MediaInvalidaException.class, () -> aluno.finalizarCurso(curso));
         assertEquals(0, aluno.getQtdCursosDisponiveis());
