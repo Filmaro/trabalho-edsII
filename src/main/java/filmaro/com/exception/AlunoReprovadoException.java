@@ -1,4 +1,4 @@
-package exception;
+package filmaro.com.exception;
 
 public class AlunoReprovadoException extends RuntimeException {
 

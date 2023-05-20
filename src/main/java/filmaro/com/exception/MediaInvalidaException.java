@@ -1,4 +1,4 @@
-package exception;
+package filmaro.com.exception;
 
 public class MediaInvalidaException extends RuntimeException {
     public MediaInvalidaException(String message) {
