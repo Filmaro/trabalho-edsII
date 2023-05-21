@@ -1,6 +1,8 @@
 name: esteira-ci-dev
 
 on:
+  push:
+    branches: [ "snapshot" ]
   pull_request:
     branches: [ "snapshot" ]
     types:
