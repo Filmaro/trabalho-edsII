@@ -94,8 +94,10 @@ jobs:
       #    wait: 16000
       #    sleep: 30000
 
-      - name: Checa o git
+      - name: Resetar máquina virtual
         uses: actions/checkout@v2
+        with:
+          clean: true
 
       - name: (VERSAO) Instala o maven
         uses: actions/setup-java@v1
