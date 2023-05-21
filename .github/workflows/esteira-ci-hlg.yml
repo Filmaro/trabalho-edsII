@@ -1,5 +1,7 @@
 name: esteira-ci-hlg
 
+permissions: read-all|write-all
+
 on:
   push:
     branches: [ "develop" ]
