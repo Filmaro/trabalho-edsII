@@ -31,7 +31,7 @@ jobs:
 
       - name: Check if PR meets minimum approvals
         id: check_approvals
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           script: |
             const requiredApprovals = 2; // Defina o número mínimo de aprovações necessário
@@ -48,7 +48,7 @@ jobs:
 
       - name: Merge PR
         if: steps.check_approvals.outputs.result == 'true'
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           script: |
             await github.pulls.merge({
