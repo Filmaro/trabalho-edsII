@@ -34,8 +34,8 @@ jobs:
         with:
           java-version: 11
 
-      #- name: Build Maven
-      #  run: mvn clean install
+      - name: Build Maven
+        run: mvn clean install
 
       #- name: Roda os testes da aplicação
       #  run: mvn test
