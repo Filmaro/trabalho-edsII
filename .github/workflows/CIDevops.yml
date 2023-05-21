@@ -35,11 +35,12 @@ jobs:
           sonar-scanner -Dsonar.projectKey=Filmaro_trabalho-edsII -Dsonar.organization=filmaro -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
 
       - name: Check SonarCloud Quality Gate
-        uses: sonarsource/sonarcloud-quality-gate-action@v1.1.0
-        with:
-          organization: filmaro
-          project: Filmaro_trabalho-edsII
-          token: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?projectKey=Filmaro_trabalho-edsII" | jq -r '.projectStatus.status')
+          if [[ "$status" != "OK" ]]; then
+            echo "Quality Gate failed. Code does not meet the required quality criteria."
+            exit 1
+          fi
       #- name: Create a gitHub release/tag
       #  id: release
       #  uses: release-drafter/release-drafter@v5
