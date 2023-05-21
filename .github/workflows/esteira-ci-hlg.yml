@@ -90,9 +90,9 @@ jobs:
           label: 🚀 release
           head: develop
           base: master
-          title: Release ${{ steps.release.outputs.tag }}
+          title: Release ${{ steps.release.outputs.tag_name }}
           body: |
-            ## [Release ${{ steps.release.outputs.tag }}](${{ steps.release.outputs.html_url }})
+            ## [Release ${{ steps.release.outputs.tag_name }}](${{ steps.release.outputs.html_url }})
             ${{ steps.release.outputs.body }}
           draft: false
 
