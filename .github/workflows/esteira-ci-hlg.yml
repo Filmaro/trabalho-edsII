@@ -1,4 +1,4 @@
-name: Esteira CI HLG
+name: esteira-ci-hlg
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: Esteira CI DEV
+name: esteira-ci-dev
 
 on:
   pull_request:

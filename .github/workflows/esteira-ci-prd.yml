@@ -1,4 +1,4 @@
-name: Esteira CI PRD
+name: esteira-ci-prd
 
 on:
   push:
