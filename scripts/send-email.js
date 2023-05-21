@@ -20,7 +20,7 @@ const mailOptions = {
   from: smtpUsername,
   to: emailsToSend,
   subject: 'Aprovação da release ' + tag_name + ' para PRODUÇÃO',
-  text: 'Para que a nova release vá para produção, é nesseário a sua aprovação nesse link\n\nLink do PR: https://github.com/Filmaro/trabalho-edsII/pull/' + prNumber + '\n\n*Após atinjir o número mínimo de aprovações, a release será gerada automáticamente.',
+  text: 'Para que a nova release vá para produção, é necessário a sua aprovação nesse link\n\nLink do PR: https://github.com/Filmaro/trabalho-edsII/pull/' + prNumber + '\n\n*Após atingir o número mínimo de aprovações, a release será gerada automáticamente.',
 };
 
 transporter.sendMail(mailOptions, (error, info) => {
