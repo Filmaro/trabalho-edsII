@@ -1,2 +1,0 @@
-filmaro.com.host.CursoEndpoint#criarCurso(Lfilmaro/com/host/dto/request/CriarCursoRequest;)LResponseEntity;
-java.net.URI#create(Ljava/lang/String;)Ljava/net/URI;

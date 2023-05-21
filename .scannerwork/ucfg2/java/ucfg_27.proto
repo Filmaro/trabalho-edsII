@@ -1,50 +1,0 @@
-
-B__sonar_lambda_2$filmaro.com.gateway.repository.entity.AlunoEntity~
-t/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/gateway/repository/entity/AlunoEntity.java'' '(q"startingBlock*Ò
-startingBlock'' '(q±
-®
-
-__unknown_file ("
-cursosAdicionadosjava.util.Map"__id*h
-
-__unknown_file (L*J3
-1filmaro.com.gateway.repository.entity.AlunoEntity"
-cursosAdicionados*
-1*„
-1', '(=¦
-£
-'B '(\
-%4"=java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;*.
-
-__unknown_file ("
-java.util.UUID*"
-
-__unknown_file (
-""óð
-'^ '(p
-%5filmaro.com.domain.Curso"\filmaro.com.gateway.repository.entity.CursoEntity#convertToCurso()Lfilmaro/com/domain/Curso;*T
-
-__unknown_file (8
-6
-x1filmaro.com.gateway.repository.entity.CursoEntity2convertToCurso()Á
-¾
-', '(q
-%6"__mapSet*@
-
-__unknown_file ($
-"
-cursosAdicionadosjava.util.Map*"
-
-__unknown_file (
-
-%4*<
-
-__unknown_file ( 
-
-%5filmaro.com.domain.Curso"
-', '(q
-
-%6:B
-'' '((6
-x1filmaro.com.gateway.repository.entity.CursoEntityB
-java.util.function.Consumer

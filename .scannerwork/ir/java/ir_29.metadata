@@ -1,8 +1,0 @@
-filmaro.com.domain.Aluno#<init>(Ljava/lang/String;Lfilmaro/com/domain/Curso;)V
-java.util.ArrayList#<init>()V
-java.util.UUID#randomUUID()Ljava/util/UUID;
-java.util.HashMap#<init>()V
-java.util.ArrayList#instance-init#
-java.util.HashMap#instance-init#
-==
-addCurso filmaro.com.domain.Aluno#addCurso(Lfilmaro/com/domain/Curso;)V

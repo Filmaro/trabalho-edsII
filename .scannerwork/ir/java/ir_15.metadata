@@ -1,4 +1,0 @@
-filmaro.com.host.dto.request.FinalizarCursoRequest#criarNota()Lfilmaro/com/domain/Nota;
-java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;
-filmaro.com.domain.Nota#instance-init#
-filmaro.com.domain.Nota#<init>(DLjava/util/UUID;)V

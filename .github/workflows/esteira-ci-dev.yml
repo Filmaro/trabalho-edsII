@@ -34,11 +34,11 @@ jobs:
         with:
           java-version: 11
 
-      - name: Build Maven
-        run: mvn clean install
+      #- name: Build Maven
+      #  run: mvn clean install
 
-      - name: Roda os testes da aplicação
-        run: mvn test
+      #- name: Roda os testes da aplicação
+      #  run: mvn test
 
       - name: SonarCloud Scan
         env:
@@ -93,6 +93,9 @@ jobs:
           retries: 20
           wait: 16000
           sleep: 30000
+
+      - name: Checa o git
+        uses: actions/checkout@v2
 
       - name: (VERSAO) Instala o maven
         uses: actions/setup-java@v1

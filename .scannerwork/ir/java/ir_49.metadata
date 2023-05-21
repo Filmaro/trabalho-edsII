@@ -1,2 +1,0 @@
-filmaro.com.gateway.repository.entity.CursoEntity#convertToCurso()Lfilmaro/com/domain/Curso;
-java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;

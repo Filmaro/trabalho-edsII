@@ -1,48 +1,0 @@
-
-Yfilmaro.com.host.dto.request.CriarAlunoRequest#convertToAluno()Lfilmaro/com/domain/Aluno;{
-q/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/host/dto/request/CriarAlunoRequest.java ("1*æ
-1 (…
-‚
- (
-%0java.lang.String"__id*X
-
-__unknown_file (<*:0
-.filmaro.com.host.dto.request.CriarAlunoRequest"
-nome
-Œ
-B (P
-%1java.lang.String"__id*b
-
-__unknown_file (F*D0
-.filmaro.com.host.dto.request.CriarAlunoRequest"
-idCursoInicialÈ
-Å
-2 (Q
-%2java.util.UUID"=java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;*.
-
-__unknown_file ("
-java.util.UUID*4
-
-__unknown_file (
-
-%1java.lang.StringFD
- (
-%3filmaro.com.domain.Aluno"filmaro.com.domain.Alunoû
-ø
- ([
-%4"Nfilmaro.com.domain.Aluno#<init>(Ljava/lang/String;Lfilmaro/com/domain/Curso;)V*<
-
-__unknown_file ( 
-
-%3filmaro.com.domain.Aluno*4
-
-__unknown_file (
-
-%0java.lang.String*"
-
-__unknown_file (
-""",
- (\ 
-
-%3filmaro.com.domain.AlunoB20
-.filmaro.com.host.dto.request.CriarAlunoRequestH

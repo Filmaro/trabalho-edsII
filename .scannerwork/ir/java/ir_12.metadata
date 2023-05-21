@@ -1,7 +1,0 @@
-domain.AlunoTest#test2()V
-filmaro.com.domain.Aluno#<init>(Ljava/lang/String;Lfilmaro/com/domain/Curso;)V
-filmaro.com.domain.Nota#instance-init#
-filmaro.com.domain.Curso#<init>(Ljava/lang/String;)V
-filmaro.com.domain.Curso#instance-init#
-filmaro.com.domain.Nota#<init>(DLjava/util/UUID;)V
-filmaro.com.domain.Aluno#instance-init#

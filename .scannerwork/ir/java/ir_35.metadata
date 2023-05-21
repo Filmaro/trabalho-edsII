@@ -1,1 +1,0 @@
-filmaro.com.host.AlunoEndpoint#finalizarCurso(Ljava/lang/String;Lfilmaro/com/host/dto/request/FinalizarCursoRequest;)LResponseEntity;

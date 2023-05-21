@@ -1,39 +1,0 @@
-
-B__sonar_lambda_3$filmaro.com.gateway.repository.entity.AlunoEntity~
-t/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/gateway/repository/entity/AlunoEntity.java* *(?"1*À
-1*) *(*È
-Å
-*, *(>
-%12java.util.UUID"=java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;*.
-
-__unknown_file ("
-java.util.UUID*3
-
-__unknown_file (
-
-xjava.lang.StringEC
-*$ *((
-%13filmaro.com.domain.Nota"filmaro.com.domain.Notað
-í
-*  *(?
-%14"2filmaro.com.domain.Nota#<init>(DLjava/util/UUID;)V*<
-
-__unknown_file ( 
-
-%13filmaro.com.domain.Nota*3
-
-__unknown_file (
-
-yjava.lang.Double*3
-
-__unknown_file (
-
-%12java.util.UUID",
-*  *(? 
-
-%13filmaro.com.domain.Nota:!
-* *(
-xjava.lang.String:!
-* *(
-yjava.lang.DoubleB!
-java.util.function.BiConsumer
