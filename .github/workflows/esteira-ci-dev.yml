@@ -22,7 +22,7 @@ jobs:
 
       - name: Verificar branch snapshot
         run: |
-          if [[ $github.event.pull_request.base.ref == "develop" ]]; then
+          if [[ "${{ github.event.pull_request.base.ref }}" == "develop" ]]; then
             echo "A branch de destivo está correta"
           else
             echo "A branch de destino deve ser a develop"
