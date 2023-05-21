@@ -98,6 +98,8 @@ jobs:
 
       - name: (EMAIL) Instala nodemailer
         run: npm install nodemailer
+      - name: teste
+        run: ls
       - name: (EMAIL) Enviar e-mail
         run: node /scripts/send-email.js
 
