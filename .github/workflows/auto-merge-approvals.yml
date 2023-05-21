@@ -31,15 +31,16 @@ jobs:
 
       - name: Check if PR meets minimum approvals
         id: check_approvals
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           script: |
             const requiredApprovals = 2; // Defina o número mínimo de aprovações necessário
-            const { data: reviews } = await github.pulls.listReviews({
+            const response = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews', {
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number
             });
+            const reviews = response.data;
             const approvals = reviews.filter(review => review.state === 'APPROVED');
             const isApproved = approvals.length >= requiredApprovals;
             console.log(`Number of approvals: ${approvals.length}`);
