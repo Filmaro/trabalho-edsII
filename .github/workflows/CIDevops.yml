@@ -2,7 +2,7 @@ name: Esteira CI
 
 on:
   push:
-    branches: [ "develop" ]
+    branches: [ "feature/*" ]
 
 jobs:
   build:
