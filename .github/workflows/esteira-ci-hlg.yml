@@ -83,6 +83,7 @@ jobs:
       #    sleep: 30000
 
       - name: Criar PR para a master
+        id: criar-pr
         uses: pyrbin/single-pr-updater@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -102,9 +103,9 @@ jobs:
       - name: (EMAIL) Enviar e-mail
         run: node scripts/send-email.js
         env:
-          SMTP_USERNAME: ${{ secrets.EMAIL_USERNAMEv }}
+          SMTP_USERNAME: ${{ secrets.EMAIL_USERNAME }}
           SMTP_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-          NUMBER_PR: ${{ steps.release.outputs.number }}
+          NUMBER_PR: ${{ steps.criar-pr.outputs.number }}
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
 
       - name: Resetar máquina virtual
