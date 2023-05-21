@@ -107,6 +107,7 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           NUMBER_PR: ${{ steps.criar-pr.outputs.number }}
           TAG_NAME: ${{ steps.release.outputs.tag_name }}
+          SEND_EMAILS: ${{ secrets.EMAIL_APPROVALS }}
 
       - name: Resetar máquina virtual
         uses: actions/checkout@v2

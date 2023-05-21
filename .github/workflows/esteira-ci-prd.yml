@@ -33,11 +33,11 @@ jobs:
           wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
           unzip sonar-scanner-cli-4.6.2.2472-linux.zip
           export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
-          sonar-scanner -Dsonar.projectKey=${{ SONAR_PROJECT_KEY }} -Dsonar.organization=${{ SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
+          sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
 
       - name: Checa se passou no SonarCloud Quality Gate
         run: |
-          status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status')
+          status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status')
           if [[ "$status" != "OK" ]]; then
             echo "Quality Gate failed. Code does not meet the required quality criteria."
             exit 1
@@ -48,3 +48,13 @@ jobs:
         with:
           service-id: srv-chl4vim4dadfmsh543eg
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
+
+      #- name: Wait for Render Deployment
+      #  uses: bounceapp/render-action@0.6.0
+      #  with:
+      #    render-token: ${{ secrets.MY_RENDER_API_KEY }}
+      #    github-token: ${{ secrets.GITHUB_TOKEN }}
+      #    service-id: srv-chl4vim4dadfmsh543eg
+      #    retries: 20
+      #    wait: 16000
+      #    sleep: 30000

@@ -4,6 +4,7 @@ const smtpUsername = process.env.SMTP_USERNAME;
 const smtpPassword = process.env.SMTP_PASSWORD;
 const prNumber     = process.env.NUMBER_PR;
 const tag_name     = process.env.TAG_NAME;
+const emailsToSend = process.env.SEND_EMAILS.split(',');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -16,10 +17,10 @@ const transporter = nodemailer.createTransport({
 });
 
 const mailOptions = {
-  from: 'joaowudarski2@gmail.com',
-  to: 'joaowudarski@gmail.com',
+  from: smtpUsername,
+  to: emailsToSend,
   subject: 'Aprovação da release ' + tag_name + ' para PRODUÇÃO',
-  text: 'Para que a nova release vá para o ambiente produtivo, é necessário uma aprovação manual no PR e deve ser dado o merge.\n\n Link do PR: https://github.com/Filmaro/trabalho-edsII/pull/' + prNumber,
+  text: 'Para que a nova release vá para produção, é nesseário a sua aprovação nesse link\n\nLink do PR: https://github.com/Filmaro/trabalho-edsII/pull/' + prNumber + '\n\n*Após atinjir o número mínimo de aprovações, a release será gerada automáticamente.',
 };
 
 transporter.sendMail(mailOptions, (error, info) => {
