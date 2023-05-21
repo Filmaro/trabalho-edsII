@@ -58,3 +58,32 @@ jobs:
       #    retries: 20
       #    wait: 16000
       #    sleep: 30000
+
+      - name: Cria uma release/tag no gitHub
+        id: release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resetar máquina virtual
+        uses: actions/checkout@v2
+        with:
+          clean: true
+
+      - name: (VERSAO) Instala o maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: (VERSAO) Atualiza versão no maven
+        run: mvn -B versions:set -DnewVersion=${{ steps.release.outputs.tag_name }} -DgenerateBackupPoms=false
+
+      - name: (VERSAO) Realiza o commit no pom da nova versão
+        uses: stefanzweifel/git-auto-commit-action@v4
+
+      - name: (VERSAO) Publicar release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.release.outputs.id }}
