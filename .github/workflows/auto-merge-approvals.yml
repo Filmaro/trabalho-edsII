@@ -45,19 +45,10 @@ jobs:
             const isApproved = approvals.length >= requiredApprovals;
             console.log(`Number of approvals: ${approvals.length}`);
             console.log(`Is approved: ${isApproved}`);
-            return {
-              isApproved: isApproved.toString()
-              approvalCount: approvals.length.toString()
-            };
-
-      - name: Log Variables
-        run: |
-          echo "Is Approved: ${{ steps.check_approvals.outputs.isApproved }}"
-          echo "Approval Count: ${{ steps.check_approvals.outputs.approvalCount }}"
-
+            return isApproved.toString();
 
       - name: Merge PR
-        if: ${{ steps.check_approvals.outputs.isApproved }} == 'true'
+        if: ${{ steps.check_approvals.outputs.result }} == 'true'
         uses: actions/github-script@v6
         with:
           script: |
