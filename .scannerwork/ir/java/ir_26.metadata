@@ -1,0 +1,2 @@
+filmaro.com.host.dto.request.CriarCursoRequest#convertToCurso()Lfilmaro/com/domain/Curso;
+java.util.UUID#randomUUID()Ljava/util/UUID;

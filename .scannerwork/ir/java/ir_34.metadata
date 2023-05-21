@@ -1,0 +1,2 @@
+filmaro.com.host.AlunoEndpoint#criarAluno(Lfilmaro/com/host/dto/request/CriarAlunoRequest;)LResponseEntity;
+java.net.URI#create(Ljava/lang/String;)Ljava/net/URI;

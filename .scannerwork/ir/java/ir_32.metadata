@@ -1,0 +1,3 @@
+filmaro.com.domain.Aluno#convertToEntity()Lfilmaro/com/gateway/repository/entity/AlunoEntity;
+java.util.stream.Collectors#toList()Ljava/util/stream/Collector;
+java.util.UUID#toString()Ljava/lang/String;

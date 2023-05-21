@@ -1,0 +1,7 @@
+organization=filmaro
+projectKey=Filmaro_trabalho-edsII
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.41269
+dashboardUrl=https://sonarcloud.io/dashboard?id=Filmaro_trabalho-edsII&branch=snapshot&resolved=false
+ceTaskId=AYg_2O4hBXBxPBD8QdQF
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYg_2O4hBXBxPBD8QdQF

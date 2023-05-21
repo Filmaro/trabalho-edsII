@@ -1,0 +1,7 @@
+filmaro.com.gateway.repository.entity.AlunoEntity#convertToAluno()Lfilmaro/com/domain/Aluno;
+java.util.ArrayList#<init>()V
+java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;
+java.util.HashMap#<init>()V
+java.util.ArrayList#instance-init#
+filmaro.com.domain.enums.TipoAssinaturaEnum#valueOf(Ljava/lang/String;)Lfilmaro/com/domain/enums/TipoAssinaturaEnum;
+java.util.HashMap#instance-init#

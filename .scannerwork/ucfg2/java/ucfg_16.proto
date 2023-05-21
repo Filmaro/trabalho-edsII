@@ -1,0 +1,28 @@
+
+]filmaro.com.domain.Curso#convertToEntity()Lfilmaro/com/gateway/repository/entity/CursoEntity;e
+[/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/domain/Curso.java (&"1*í
+1 (j
+h
+ (
+%0java.util.UUID"__id*@
+
+__unknown_file ($*"
+filmaro.com.domain.Curso"
+idíè
+ (!
+%1java.lang.String"+java.util.UUID#toString()Ljava/lang/String;*2
+
+__unknown_file (
+
+%0java.util.UUID2
+toString()n
+l
+ (
+%2java.lang.String"__id*B
+
+__unknown_file (&*$
+filmaro.com.domain.Curso"
+nome"
+ (
+""B
+filmaro.com.domain.CursoH

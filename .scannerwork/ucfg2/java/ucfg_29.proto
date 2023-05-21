@@ -1,0 +1,144 @@
+
+\filmaro.com.gateway.repository.entity.AlunoEntity#convertToAluno()Lfilmaro/com/domain/Aluno;~
+t/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/gateway/repository/entity/AlunoEntity.java% %("1*ü
+1&- &(<86
+&1 &(:
+%0java.util.HashMap"java.util.HashMapf
+d
+&- &(<
+%1"java.util.HashMap#<init>()V*5
+
+__unknown_file (
+
+%0java.util.HashMapm
+k
+& &(="
+cursosAdicionadosjava.util.Map"__id*5
+
+__unknown_file (
+
+%0java.util.HashMapì
+ê
+' '(
+%2java.util.List"__id*h
+
+__unknown_file (L*J3
+1filmaro.com.gateway.repository.entity.AlunoEntity"
+cursosAdicionadosß
+§
+'' '(q!
+%3java.util.function.Consumer"__declareFunction*b
+
+__unknown_file (FD
+B__sonar_lambda_2$filmaro.com.gateway.repository.entity.AlunoEntityü
+ú
+
+__unknown_file (8
+!
+%3java.util.function.Consumer"
+cursosAdicionados"__id*@
+
+__unknown_file ($
+"
+cursosAdicionadosjava.util.MapÚÔ
+' '(r
+
+%7void":java.lang.Iterable#forEach(Ljava/util/function/Consumer;)V*2
+
+__unknown_file (
+
+%2java.util.List*?
+
+__unknown_file (#
+!
+%3java.util.function.Consumer2&forEach(Ljava/util/function/Consumer;)<:
+)" )(-
+%8java.util.ArrayList"java.util.ArrayListj
+h
+) )(/
+%9"java.util.ArrayList#<init>()V*7
+
+__unknown_file (
+
+%8java.util.ArrayListg
+e
+) )(0
+notaListjava.util.List"__id*7
+
+__unknown_file (
+
+%8java.util.ArrayListá
+Ñ
+* *(
+%10java.util.Map"__id*\
+
+__unknown_file (@*>3
+1filmaro.com.gateway.repository.entity.AlunoEntity"
+notas™
+ß
+* *(?$
+%11java.util.function.BiConsumer"__declareFunction*b
+
+__unknown_file (FD
+B__sonar_lambda_3$filmaro.com.gateway.repository.entity.AlunoEntityıÚ
+* *(@
+%15void"7java.util.Map#forEach(Ljava/util/function/BiConsumer;)V*2
+
+__unknown_file (
+
+%10java.util.Map*B
+
+__unknown_file (&
+$
+%11java.util.function.BiConsumer2(forEach(Ljava/util/function/BiConsumer;)á
+Ñ
+.$ .(&
+%16java.lang.String"__id*Y
+
+__unknown_file (=*;3
+1filmaro.com.gateway.repository.entity.AlunoEntity"
+id 
+«
+. .('
+%17java.util.UUID"=java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;*.
+
+__unknown_file ("
+java.util.UUID*5
+
+__unknown_file (
+
+%16java.lang.Stringâ
+Ü
+/ /(
+%18java.lang.String"__id*[
+
+__unknown_file (?*=3
+1filmaro.com.gateway.repository.entity.AlunoEntity"
+nomeö
+ó
+1& 1(:
+%19java.lang.Integer"__id*k
+
+__unknown_file (O*M3
+1filmaro.com.gateway.repository.entity.AlunoEntity"
+qtdCursosDisponiveisì
+ê
+2; 2(I
+%20java.lang.String"__id*e
+
+__unknown_file (I*G3
+1filmaro.com.gateway.repository.entity.AlunoEntity"
+tipoAssinaturaª
+∏
+2  2(J2
+%21+filmaro.com.domain.enums.TipoAssinaturaEnum"tfilmaro.com.domain.enums.TipoAssinaturaEnum#valueOf(Ljava/lang/String;)Lfilmaro/com/domain/enums/TipoAssinaturaEnum;*K
+
+__unknown_file (/"-
++filmaro.com.domain.enums.TipoAssinaturaEnum*5
+
+__unknown_file (
+
+%20java.lang.String"
+, 3(
+""B53
+1filmaro.com.gateway.repository.entity.AlunoEntityH
