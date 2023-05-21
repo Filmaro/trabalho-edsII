@@ -1,6 +1,6 @@
 name: esteira-ci-hlg
 
-permissions: read-all|write-all
+permissions: write-all
 
 on:
   push:
