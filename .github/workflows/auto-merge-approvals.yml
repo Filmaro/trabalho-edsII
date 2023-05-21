@@ -49,7 +49,7 @@ jobs:
 
       - name: Merge PR
         if: steps.check_approvals.outputs.result == 'true'
-        uses: actions/github-script@v4
+        uses: actions/github-script@v6
         with:
           script: |
             await github.pulls.merge({
