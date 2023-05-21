@@ -1,0 +1,93 @@
+name: Esteira CI DEV
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+    types:
+      - synchronize
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [ 11 ]
+    steps:
+      - name: Checa o git
+        uses: actions/checkout@v2
+
+      - name: Verificar branch snapshot
+        run: |
+          if [[ ${{ github.event.pull_request.head.ref }} == "snapshot" ]]; then
+            echo "A branch de origem está correta"
+          else
+            echo "A branch de origem deve ser a snapshot"
+            exit 1
+          fi
+
+      - name: Faz o set JDK Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build Maven
+        run: mvn clean install
+
+      - name: Roda os testes da aplicação
+        run: mvn test
+
+      - name: SonarCloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+          export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
+          sonar-scanner -Dsonar.projectKey=${{ SONAR_PROJECT_KEY }} -Dsonar.organization=${{ SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
+
+      - name: Checa se passou no SonarCloud Quality Gate
+        run: |
+          status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status')
+          if [[ "$status" != "OK" ]]; then
+            echo "Quality Gate failed. Code does not meet the required quality criteria."
+            exit 1
+          fi
+
+      - name: Cria uma release/tag no gitHub
+        id: release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: (DOCKER HUB) Faz o set do QEMU para
+        uses: docker/setup-qemu-action@v2
+      - name: (DOCKER HUB) Faz o set Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: (DOCKER HUB) Login no Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: (DOCKER HUB) Build e push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}-SNAPSHOT
+
+      - name: (RENDER) Deploy no ambiente de dev
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: srv-chl4uvu7avj2179ju4b0
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+
+      - name: (VERSAO) Instala o maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: (VERSAO) Atualiza versão no maven
+        run: mvn -B versions:set -DnewVersion=${{ steps.release.outputs.tag_name }}-SNAPSHOT -DgenerateBackupPoms=false
+
+      - name: (VERSAO) Realiza o commit no pom da nova versão
+        uses: stefanzweifel/git-auto-commit-action@v4
