@@ -1,8 +1,8 @@
-name: Esteira CI
+name: esteira-ci-prd
 
 on:
   push:
-    branches: [ "feature/*" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -12,17 +12,18 @@ jobs:
       matrix:
         java-version: [ 11 ]
     steps:
-      - name: Check git
+      - name: Checa o git
         uses: actions/checkout@v2
 
-      - name: Setup Java JDK
+      - name: Faz o set JDK Java
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
       - name: Build Maven
         run: mvn clean install
 
-      - name: Run unit tests
+      - name: Roda os testes da aplicação
         run: mvn test
 
       - name: SonarCloud Scan
@@ -34,26 +35,16 @@ jobs:
           export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
           sonar-scanner -Dsonar.projectKey=${{ SONAR_PROJECT_KEY }} -Dsonar.organization=${{ SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
 
-      - name: Check SonarCloud Quality Gate
+      - name: Checa se passou no SonarCloud Quality Gate
         run: |
           status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status')
           if [[ "$status" != "OK" ]]; then
             echo "Quality Gate failed. Code does not meet the required quality criteria."
             exit 1
           fi
-      - name: Create a gitHub release/tag
-        id: release
-        uses: release-drafter/release-drafter@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Install maven
-        uses: actions/setup-java@v1
+      - name: (RENDER) Deploy no ambiente de PRD
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          java-version: 11
-
-      - name: Update maven version
-        run: mvn -B versions:set -DnewVersion=${{ steps.release.outputs.tag_name }} -DgenerateBackupPoms=false
-
-      - name: Auto commit
-        uses: stefanzweifel/git-auto-commit-action@v4
+          service-id: srv-chl4vim4dadfmsh543eg
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
