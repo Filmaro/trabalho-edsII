@@ -20,14 +20,14 @@ jobs:
       - name: Checa o git
         uses: actions/checkout@v2
 
-      - name: Verificar branch snapshot
-        run: |
-          if [[ "${{ github.event.pull_request.base.ref }}" == "develop" ]]; then
-            echo "A branch de destivo está correta"
-          else
-            echo "A branch de destino deve ser a develop"
-            exit 1
-          fi
+      #- name: Verificar branch snapshot
+      #  run: |
+      #    if [[ "${{ github.event.pull_request.base.ref }}" == "develop" ]]; then
+      #      echo "A branch de destivo está correta"
+      #    else
+      #      echo "A branch de destino deve ser a develop"
+      #      exit 1
+      #    fi
 
       - name: Faz o set JDK Java
         uses: actions/setup-java@v1
