@@ -2,7 +2,7 @@ name: Esteira CI DEV
 
 on:
   pull_request:
-    branches: [ "develop" ]
+    branches: [ "snapshot" ]
     types:
       - synchronize
 
@@ -19,10 +19,10 @@ jobs:
 
       - name: Verificar branch snapshot
         run: |
-          if [[ ${{ github.event.pull_request.head.ref }} == "snapshot" ]]; then
-            echo "A branch de origem está correta"
+          if [[ ${{ github.event.pull_request.base.ref }} == "develop" ]]; then
+            echo "A branch de destivo está correta"
           else
-            echo "A branch de origem deve ser a snapshot"
+            echo "A branch de destino deve ser a develop"
             exit 1
           fi
 
