@@ -1,0 +1,4 @@
+filmaro.com.host.dto.request.CriarAlunoRequest#convertToAluno()Lfilmaro/com/domain/Aluno;
+java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;
+filmaro.com.domain.Aluno#<init>(Ljava/lang/String;Lfilmaro/com/domain/Curso;)V
+filmaro.com.domain.Aluno#instance-init#

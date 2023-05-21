@@ -1,0 +1,4 @@
+filmaro.com.domain.Nota#isReprovado()Z
+filmaro.com.exception.MediaInvalidaException#instance-init#
+filmaro.com.exception.MediaInvalidaException#<init>(Ljava/lang/String;)V
+java.lang.String#format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;

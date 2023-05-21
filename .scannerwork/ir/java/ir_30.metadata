@@ -1,0 +1,3 @@
+filmaro.com.domain.Aluno#addCurso(Lfilmaro/com/domain/Curso;)V
+filmaro.com.exception.CursosDisnoniveisInvalidosException#instance-init#
+filmaro.com.exception.CursosDisnoniveisInvalidosException#<init>(Ljava/lang/String;)V

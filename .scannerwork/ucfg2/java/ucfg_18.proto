@@ -1,0 +1,45 @@
+
+kfilmaro.com.gateway.impl.AlunoGatewayImpl#salvarAluno(Lfilmaro/com/domain/Aluno;)Lfilmaro/com/domain/Aluno;v
+l/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/gateway/impl/AlunoGatewayImpl.java ("startingBlock*˜
+startingBlock ()”
+‘
+ (
+%5"
+__annotate*2
+
+__unknown_file (
+java.lang.Override*?
+
+__unknown_file (#
+!
+alunofilmaro.com.domain.Alunoa
+_
+# ((!
+alunofilmaro.com.domain.Aluno"__annotation*"
+
+__unknown_file (
+
+%5*
+7*>
+5 ("/
+ (#
+!
+alunofilmaro.com.domain.Aluno*º
+7 (©
+¦
+ (4
+%0.filmaro.com.gateway.repository.AlunoRepository"__id*^
+
+__unknown_file (B*@+
+)filmaro.com.gateway.impl.AlunoGatewayImpl"
+alunoRepositoryùö
+! (87
+%11filmaro.com.gateway.repository.entity.AlunoEntity"]filmaro.com.domain.Aluno#convertToEntity()Lfilmaro/com/gateway/repository/entity/AlunoEntity;*?
+
+__unknown_file (#
+!
+alunofilmaro.com.domain.Aluno2convertToEntity()*
+5:-
+ ((!
+alunofilmaro.com.domain.AlunoB-+
+)filmaro.com.gateway.impl.AlunoGatewayImplH

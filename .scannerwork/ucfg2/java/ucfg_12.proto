@@ -1,0 +1,49 @@
+
+Wfilmaro.com.host.dto.request.FinalizarCursoRequest#criarNota()Lfilmaro/com/domain/Nota;
+u/home/runner/work/trabalho-edsII/trabalho-edsII/src/main/java/filmaro/com/host/dto/request/FinalizarCursoRequest.java ("1*æ
+1 (!Ž
+‹
+ (!
+%0java.lang.Double"__id*a
+
+__unknown_file (E*C4
+2filmaro.com.host.dto.request.FinalizarCursoRequest"
+	notaCurso–
+“
+3 (D
+%1java.lang.String"__id*i
+
+__unknown_file (M*K4
+2filmaro.com.host.dto.request.FinalizarCursoRequest"
+idCursoFinalizadoÈ
+Å
+# (E
+%2java.util.UUID"=java.util.UUID#fromString(Ljava/lang/String;)Ljava/util/UUID;*.
+
+__unknown_file ("
+java.util.UUID*4
+
+__unknown_file (
+
+%1java.lang.StringDB
+ (
+%3filmaro.com.domain.Nota"filmaro.com.domain.Notaî
+ë
+ (F
+%4"2filmaro.com.domain.Nota#<init>(DLjava/util/UUID;)V*;
+
+__unknown_file (
+
+%3filmaro.com.domain.Nota*4
+
+__unknown_file (
+
+%0java.lang.Double*2
+
+__unknown_file (
+
+%2java.util.UUID"+
+ (G
+
+%3filmaro.com.domain.NotaB64
+2filmaro.com.host.dto.request.FinalizarCursoRequestH
