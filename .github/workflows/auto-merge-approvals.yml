@@ -1,16 +1,9 @@
 name: auto-merge-approvals
 
 on:
-  pull_request_review:
+  push:
     branches:
-      - develop
-    types:
-      - submitted
-  pull_request:
-    branches:
-      - develop
-    types:
-      - synchronize
+      - kkkk
 
 jobs:
   auto_merge:
