@@ -15,8 +15,6 @@ on:
 jobs:
   auto_merge:
     runs-on: ubuntu-latest
-    run: echo ${{ github.event.pull_request.labels.*.name }}
-    if: contains(github.event.pull_request.labels.*.name, 'Review required')
     steps:
       - name: merge
         uses: nbrugger-tgm/merge-pr-action@v0.2.3
