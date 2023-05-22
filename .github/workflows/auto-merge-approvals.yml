@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch
-        id: check-branch
+        id: check_branch
         run: |
           const isBaseValid = false;
           const isHeadValid = false;
@@ -36,7 +36,7 @@ jobs:
           };
 
       - name: Check if PR meets minimum approvals
-        if: ${{ isBaseValid }} == true && ${{ isHeadValid }} == true
+        if: ${{  steps.check_branch.outputs.isBaseValid }} == 'true' && ${{ steps.check_branch.outputs.isHeadValid }} == 'true'
         id: check_approvals
         uses: actions/github-script@v6
         with:
@@ -59,7 +59,7 @@ jobs:
             };
 
       - name: Merge PR
-        if: ${{ isBaseValid }} == 'true' && ${{ isHeadValid }} == 'true' && ${{ steps.check_approvals.outputs.isApproved }} == 'true'
+        if: ${{  steps.check_branch.outputs.isBaseValid }} == 'true' && ${{ steps.check_branch.outputs.isHeadValid }} == 'true' && ${{ steps.check_approvals.outputs.isApproved }} == 'true'
         uses: nbrugger-tgm/merge-pr-action@v0.2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
