@@ -1,8 +1,9 @@
 name: esteira-ci-prd
 
 on:
-  push:
-    branches: [ "master" ]
+  release:
+    types:
+      - created
 
 
 jobs:
@@ -50,15 +51,15 @@ jobs:
           service-id: srv-chl4vim4dadfmsh543eg
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
 
-      #- name: Wait for Render Deployment
-      #  uses: bounceapp/render-action@0.6.0
-      #  with:
-      #    render-token: ${{ secrets.MY_RENDER_API_KEY }}
-      #    github-token: ${{ secrets.GITHUB_TOKEN }}
-      #    service-id: srv-chl4vim4dadfmsh543eg
-      #    retries: 20
-      #    wait: 16000
-      #    sleep: 30000
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.MY_RENDER_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-chl4vim4dadfmsh543eg
+          retries: 20
+          wait: 16000
+          sleep: 30000
 
       - name: Cria uma release/tag no gitHub
         id: release
@@ -81,10 +82,3 @@ jobs:
 
       - name: (VERSAO) Realiza o commit no pom da nova versão
         uses: stefanzweifel/git-auto-commit-action@v4
-
-      - name: (VERSAO) Publicar release
-        uses: eregon/publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.release.outputs.id }}
