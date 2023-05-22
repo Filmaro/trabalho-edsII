@@ -17,26 +17,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check branch
-        id: check_branch
+        id: check-branch
         run: |
           const isBaseValid = false;
           const isHeadValid = false;
           if [[ ${{ github.event.pull_request.base.ref }} != 'develop' ]]; then
             echo "Not the desired base branch. Exiting workflow."
-            exit 0
+            exit 1
           fi
 
           if [[ ${{ github.event.pull_request.head.ref }} != 'master' ]]; then
             echo "Not the desired head branch. Exiting workflow."
-            exit 0
+            exit 1
           fi
-          return {
-            isBaseValid: isBaseValid.toString(),
-            isHeadValid: isHeadValid.toString()
-          };
 
       - name: Check if PR meets minimum approvals
-        if: ${{  steps.check_branch.outputs.isBaseValid }} == 'true' && ${{ steps.check_branch.outputs.isHeadValid }} == 'true'
         id: check_approvals
         uses: actions/github-script@v6
         with:
@@ -59,7 +54,7 @@ jobs:
             };
 
       - name: Merge PR
-        if: ${{  steps.check_branch.outputs.isBaseValid }} == 'true' && ${{ steps.check_branch.outputs.isHeadValid }} == 'true' && ${{ steps.check_approvals.outputs.isApproved }} == 'true'
+        if: ${{ steps.check_approvals.outputs.isApproved }} == 'true'
         uses: nbrugger-tgm/merge-pr-action@v0.2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
