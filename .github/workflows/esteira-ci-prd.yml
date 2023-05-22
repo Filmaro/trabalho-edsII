@@ -1,0 +1,89 @@
+name: esteira-ci-prd
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java-version: [ 11 ]
+    steps:
+      - name: Checa o git
+        uses: actions/checkout@v2
+
+      - name: Faz o set JDK Java
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build Maven
+        run: mvn clean install
+
+      - name: Roda os testes da aplicação
+        run: mvn test
+
+      - name: SonarCloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+          export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
+          sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
+
+      - name: Checa se passou no SonarCloud Quality Gate
+        run: |
+          status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?projectKey=${{ secrets.SONAR_PROJECT_KEY }}" | jq -r '.projectStatus.status')
+          if [[ "$status" != "OK" ]]; then
+            echo "Quality Gate failed. Code does not meet the required quality criteria."
+            exit 1
+          fi
+
+      - name: (RENDER) Deploy no ambiente de PRD
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: srv-chl4vim4dadfmsh543eg
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+
+      #- name: Wait for Render Deployment
+      #  uses: bounceapp/render-action@0.6.0
+      #  with:
+      #    render-token: ${{ secrets.MY_RENDER_API_KEY }}
+      #    github-token: ${{ secrets.GITHUB_TOKEN }}
+      #    service-id: srv-chl4vim4dadfmsh543eg
+      #    retries: 20
+      #    wait: 16000
+      #    sleep: 30000
+
+      - name: Cria uma release/tag no gitHub
+        id: release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Resetar máquina virtual
+        uses: actions/checkout@v2
+        with:
+          clean: true
+
+      - name: (VERSAO) Instala o maven
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: (VERSAO) Atualiza versão no maven
+        run: mvn -B versions:set -DnewVersion=${{ steps.release.outputs.tag_name }} -DgenerateBackupPoms=false
+
+      - name: (VERSAO) Realiza o commit no pom da nova versão
+        uses: stefanzweifel/git-auto-commit-action@v4
+
+      - name: (VERSAO) Publicar release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.release.outputs.id }}
