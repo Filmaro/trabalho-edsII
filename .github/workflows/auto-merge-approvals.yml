@@ -1,16 +1,9 @@
 name: auto-merge-approvals
 
 on:
-  pull_request_review:
+  push:
     branches:
-      - develop
-    types:
-      - submitted
-  pull_request:
-    branches:
-      - develop
-    types:
-      - synchronize
+      - kkkk
 
 jobs:
   auto_merge:
@@ -19,14 +12,12 @@ jobs:
       - name: Check branch
         id: check-branch
         run: |
-          const isBaseValid = false;
-          const isHeadValid = false;
-          if [[ ${{ github.event.pull_request.base.ref }} != 'develop' ]]; then
+          if [[ ${{ github.event.pull_request.head.ref }} != 'develop' ]]; then
             echo "Not the desired base branch. Exiting workflow."
             exit 1
           fi
 
-          if [[ ${{ github.event.pull_request.head.ref }} != 'master' ]]; then
+          if [[ ${{ github.event.pull_request.base.ref }} != 'master' ]]; then
             echo "Not the desired head branch. Exiting workflow."
             exit 1
           fi
@@ -54,8 +45,26 @@ jobs:
             };
 
       - name: Merge PR
+        id: merge_pr
         if: ${{ steps.check_approvals.outputs.isApproved }} == 'true'
         uses: nbrugger-tgm/merge-pr-action@v0.2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull_request: ${{ github.event.pull_request.number }}
+
+      - name: Cria uma release/tag no gitHub
+        if: ${{ steps.merge_pr.outputs.commit }} != ''
+        id: release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commitish: develop
+
+      - name: Publicar release
+        if: ${{ steps.merge_pr.outputs.commit }} != ''
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.release.outputs.id }}
