@@ -19,8 +19,6 @@ jobs:
       - name: Check branch
         id: check-branch
         run: |
-          const isBaseValid = false;
-          const isHeadValid = false;
           if [[ ${{ github.event.pull_request.base.ref }} != 'develop' ]]; then
             echo "Not the desired base branch. Exiting workflow."
             exit 1
