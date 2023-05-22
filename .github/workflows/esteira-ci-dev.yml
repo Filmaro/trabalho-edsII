@@ -71,11 +71,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: (DOCKER HUB) Build e push
-        uses: docker/build-push-action@v4
-        with:
-          push: true
-          tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}-SNAPSHOT
+      #- name: (DOCKER HUB) Build e push
+      #  uses: docker/build-push-action@v4
+      #  with:
+      #    push: true
+      #    tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}-SNAPSHOT
 
       - name: (RENDER) Deploy no ambiente de dev
         uses: johnbeynon/render-deploy-action@v0.0.8
