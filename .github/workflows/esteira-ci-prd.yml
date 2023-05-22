@@ -1,10 +1,8 @@
 name: esteira-ci-prd
 
 on:
-  release:
-    types:
-      - created
-
+  push:
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -82,3 +80,10 @@ jobs:
 
       - name: (VERSAO) Realiza o commit no pom da nova versão
         uses: stefanzweifel/git-auto-commit-action@v4
+
+      - name: (VERSAO) Publicar release
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.release.outputs.id }}
