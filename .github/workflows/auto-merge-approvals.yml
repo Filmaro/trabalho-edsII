@@ -15,48 +15,9 @@ on:
 jobs:
   auto_merge:
     runs-on: ubuntu-latest
-
+    if: event.label.name == 'ready for merge'
     steps:
-      - name: Check branch
-        run: |
-          if [[ ${{ github.event.pull_request.base.ref }} != 'develop' ]]; then
-            echo "Not the desired base branch. Exiting workflow."
-            exit 0
-          fi
-
-          if [[ ${{ github.event.pull_request.head.ref }} != 'master' ]]; then
-            echo "Not the desired head branch. Exiting workflow."
-            exit 0
-          fi
-
-      - name: Check if PR meets minimum approvals
-        id: check_approvals
-        uses: actions/github-script@v6
+      - name: merge
+        uses: nbrugger-tgm/merge-pr-action@v0.2.3
         with:
-          script: |
-            const requiredApprovals = 1; // Defina o número mínimo de aprovações necessário
-            const response = await github.request('GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews', {
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number
-            });
-            const reviews = response.data;
-            const approvals = reviews.filter(review => review.state === 'APPROVED');
-            const isApproved = approvals.length >= requiredApprovals;
-            console.log(`Number of approvals: ${approvals.length}`);
-            console.log(`Is approved: ${isApproved}`);
-            return isApproved.toString();
-
-      - name: Debug Pull Request Number
-        run: 'echo Pull Request Number: ${{ github.event.pull_request.number }}'
-
-      - name: Merge PR
-        if: ${{ steps.check_approvals.outputs.result }} == 'true'
-        uses: actions/github-script@v6
-        with:
-          script: |
-            await github.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.payload.pull_request.number,
-            });
+          token: ${{ secrets.GITHUB_TOKEN }}
