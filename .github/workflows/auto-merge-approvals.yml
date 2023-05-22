@@ -52,8 +52,17 @@ jobs:
             };
 
       - name: Merge PR
+        id: merge_pr
         if: ${{ steps.check_approvals.outputs.isApproved }} == 'true'
         uses: nbrugger-tgm/merge-pr-action@v0.2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull_request: ${{ github.event.pull_request.number }}
+
+      - name: Publicar release
+        if: ${{ steps.merge_pr.outputs.commit }} != ''
+        uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.release.outputs.id }}
