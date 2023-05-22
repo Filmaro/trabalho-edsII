@@ -15,7 +15,7 @@ on:
 jobs:
   auto_merge:
     runs-on: ubuntu-latest
-    if: event.label.name == 'ready for merge'
+    if: contains(github.event.pull_request.labels.*.name, 'ready for merge')
     steps:
       - name: merge
         uses: nbrugger-tgm/merge-pr-action@v0.2.3
