@@ -1,10 +1,9 @@
 name: esteira-ci-dev
 
 on:
-  push:
-    branches: [ "snapshot" ]
   pull_request:
-    branches: [ "snapshot" ]
+    branches:
+      - develop
     types:
       - opened
       - synchronize
@@ -20,14 +19,14 @@ jobs:
       - name: Checa o git
         uses: actions/checkout@v2
 
-      #- name: Verificar branch snapshot
-      #  run: |
-      #    if [[ "${{ github.event.pull_request.base.ref }}" == "develop" ]]; then
-      #      echo "A branch de destivo está correta"
-      #    else
-      #      echo "A branch de destino deve ser a develop"
-      #      exit 1
-      #    fi
+      - name: Verificar branch snapshot
+        run: |
+          if [[ "${{ github.event.pull_request.base.ref }}" == "develop" ]]; then
+            echo "A branch de destivo está correta"
+          else
+            echo "A branch de destino deve ser a develop"
+            exit 1
+          fi
 
       - name: Faz o set JDK Java
         uses: actions/setup-java@v1
@@ -37,8 +36,8 @@ jobs:
       - name: Build Maven
         run: mvn clean install
 
-      #- name: Roda os testes da aplicação
-      #  run: mvn test
+      - name: Roda os testes da aplicação
+        run: mvn test
 
       - name: SonarCloud Scan
         env:
@@ -62,6 +61,8 @@ jobs:
         uses: release-drafter/release-drafter@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commitish: develop
 
       - name: (DOCKER HUB) Faz o set do QEMU para
         uses: docker/setup-qemu-action@v2
@@ -72,17 +73,17 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      #- name: (DOCKER HUB) Build e push
-      #  uses: docker/build-push-action@v4
-      #  with:
-      #    push: true
-      #    tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}-SNAPSHOT
-
-      - name: (RENDER) Deploy no ambiente de dev
-        uses: johnbeynon/render-deploy-action@v0.0.8
+      - name: (DOCKER HUB) Build e push
+        uses: docker/build-push-action@v4
         with:
-          service-id: srv-chl4uvu7avj2179ju4b0
-          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+          push: true
+          tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}-SNAPSHOT
+
+      #- name: (RENDER) Deploy no ambiente de dev
+      #  uses: johnbeynon/render-deploy-action@v0.0.8
+      #  with:
+      #    service-id: srv-chl4uvu7avj2179ju4b0
+      #    api-key: ${{ secrets.MY_RENDER_API_KEY }}
 
       #- name: Wait for Render Deployment
       #  uses: bounceapp/render-action@0.6.0
