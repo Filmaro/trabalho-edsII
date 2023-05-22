@@ -1,10 +1,9 @@
 name: esteira-ci-dev
 
 on:
-  push:
-    branches: [ "snapshot" ]
   pull_request:
-    branches: [ "snapshot" ]
+    branches:
+      - snapshot
     types:
       - opened
       - synchronize
