@@ -59,6 +59,15 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull_request: ${{ github.event.pull_request.number }}
 
+      - name: Cria uma release/tag no gitHub
+        if: ${{ steps.merge_pr.outputs.commit }} != ''
+        id: release
+        uses: release-drafter/release-drafter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          commitish: develop
+
       - name: Publicar release
         if: ${{ steps.merge_pr.outputs.commit }} != ''
         uses: eregon/publish-release@v1
