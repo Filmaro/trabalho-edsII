@@ -2,7 +2,7 @@ spring:
   application:
     name: trabalho-edsII
   profiles:
-    active: test
+    active: ${ENVIRONMENT}
 
 server:
   port: 8080
