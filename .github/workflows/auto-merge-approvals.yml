@@ -20,12 +20,12 @@ jobs:
         run: |
           if [[ ${{ github.event.pull_request.base.ref }} != 'develop' ]]; then
             echo "Not the desired base branch. Exiting workflow."
-            exit 0
+            exit 1
           fi
 
           if [[ ${{ github.event.pull_request.head.ref }} != 'master' ]]; then
             echo "Not the desired head branch. Exiting workflow."
-            exit 0
+            exit 1
           fi
 
       - name: Check if PR meets minimum approvals
