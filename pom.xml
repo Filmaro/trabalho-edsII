@@ -12,7 +12,7 @@
 
     <groupId>filmaro.com</groupId>
     <artifactId>trabalho-edsII</artifactId>
-    <version>v0.1.1</version>
+    <version>-SNAPSHOT</version>
     <name>trabalho-edsII</name>
 
     <properties>
