@@ -28,14 +28,14 @@ jobs:
       - name: Roda os testes da aplicação
         run: mvn test
 
-      #- name: SonarCloud Scan
-      #  env:
-      #    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      #  run: |
-      #    wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
-      #    unzip sonar-scanner-cli-4.6.2.2472-linux.zip
-      #    export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
-      #    sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
+      - name: SonarCloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-linux.zip
+          unzip sonar-scanner-cli-4.6.2.2472-linux.zip
+          export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
+          sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} -Dsonar.sources=src -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
 
       #- name: Checa se passou no SonarCloud Quality Gate
       #  run: |
@@ -60,11 +60,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      #- name: (DOCKER HUB) Build e push
-      #  uses: docker/build-push-action@v4
-      #  with:
-      #    push: true
-      #    tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}
+      - name: (DOCKER HUB) Build e push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: joaowudarski/trabalho-edsii:${{ steps.release.outputs.tag_name }}
 
       - name: (RENDER) Deploy no ambiente de hlg
         uses: johnbeynon/render-deploy-action@v0.0.8
@@ -72,15 +72,15 @@ jobs:
           service-id: srv-chl4vajhp8uej71rbbq0
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
 
-      #- name: Wait for Render Deployment
-      #  uses: bounceapp/render-action@0.6.0
-      #  with:
-      #    render-token: ${{ secrets.MY_RENDER_API_KEY }}
-      #    github-token: ${{ secrets.GITHUB_TOKEN }}
-      #    service-id: srv-chl4vajhp8uej71rbbq0
-      #    retries: 20
-      #    wait: 16000
-      #    sleep: 30000
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.MY_RENDER_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-chl4vajhp8uej71rbbq0
+          retries: 20
+          wait: 16000
+          sleep: 30000
 
       - name: Criar PR para a master
         id: criar-pr

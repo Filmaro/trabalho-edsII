@@ -85,15 +85,15 @@ jobs:
       #    service-id: srv-chl4uvu7avj2179ju4b0
       #    api-key: ${{ secrets.MY_RENDER_API_KEY }}
 
-      - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
-        with:
-          render-token: ${{ secrets.MY_RENDER_API_KEY }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          service-id: srv-chl4uvu7avj2179ju4b0
-          retries: 20
-          wait: 16000
-          sleep: 30000
+      #- name: Wait for Render Deployment
+      #  uses: bounceapp/render-action@0.6.0
+      #  with:
+      #    render-token: ${{ secrets.MY_RENDER_API_KEY }}
+      #    github-token: ${{ secrets.GITHUB_TOKEN }}
+      #    service-id: srv-chl4uvu7avj2179ju4b0
+      #    retries: 20
+      #    wait: 16000
+      #    sleep: 30000
 
       - name: Resetar máquina virtual
         uses: actions/checkout@v2
