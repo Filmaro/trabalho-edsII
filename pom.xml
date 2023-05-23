@@ -27,7 +27,7 @@
             *.yaml,
             Dockerfile,
             src/test/**/*,
-            src/main/java/filmaro/com/host/dto/**/*,
+            src/**/*,
             src/main/resources/**
         </sonar.coverage.exclusions>
         <sonar.sources>src/main/java</sonar.sources>
