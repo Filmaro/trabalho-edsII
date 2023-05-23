@@ -29,6 +29,8 @@
             src/test/**/*,
             src/main/resources/**
         </sonar.exclusions>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.test.exclusions>src/test/**/*</sonar.test.exclusions>
         <sonar.projectKey>Filmaro_${project.artifactId}</sonar.projectKey>
         <sonar.organization>filmaro</sonar.organization>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
