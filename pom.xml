@@ -27,6 +27,7 @@
             *.yaml,
             Dockerfile,
             src/test/**/*,
+            src/main/java/filmaro/com/domain/**/*
             src/main/resources/**
         </sonar.exclusions>
         <sonar.sources>src/main/java</sonar.sources>
@@ -107,6 +108,11 @@
                         <groupId>org.jacoco</groupId>
                         <artifactId>jacoco-maven-plugin</artifactId>
                         <version>${jacoco.version}</version>
+                        <configuration>
+                            <excludes>
+                                <exclude>${sonar.exclusions}</exclude>
+                            </excludes>
+                        </configuration>
                         <executions>
                             <execution>
                                 <id>jacoco-initialize</id>
