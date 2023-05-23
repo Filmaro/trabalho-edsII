@@ -110,7 +110,7 @@
                         <version>${jacoco.version}</version>
                         <configuration>
                             <excludes>
-                                <exclude>src/test/**/*</exclude>
+                                <exclude>src/**/*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
