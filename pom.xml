@@ -19,21 +19,9 @@
         <java.version>11</java.version>
         <jacoco.version>0.8.8</jacoco.version>
         <sonar.coverage.jacoco.xmlReportPaths>/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.language>java</sonar.language>
-        <sonar.coverage.exclusions>
-            *.xml,
-            *.yml,
-            *.yaml,
-            Dockerfile,
-            src/test/**/*,
-            src/**/*,
-            src/main/resources/**
-        </sonar.coverage.exclusions>
-        <sonar.sources>src/main/java</sonar.sources>
         <sonar.test.exclusions>src/test/**/*</sonar.test.exclusions>
         <sonar.projectKey>Filmaro_${project.artifactId}</sonar.projectKey>
-        <sonar.organization>filmaro</sonar.organization>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     </properties>
@@ -110,7 +98,7 @@
                         <version>${jacoco.version}</version>
                         <configuration>
                             <excludes>
-                                <exclude>src/**/*</exclude>
+                                <exclude>src/test/**/*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
