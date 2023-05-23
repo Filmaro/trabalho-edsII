@@ -27,7 +27,7 @@
             *.yaml,
             Dockerfile,
             src/test/**/*,
-            src/main/java/filmaro/com/domain/**/*
+            src/main/java/filmaro/com/host/dto/**/*,
             src/main/resources/**
         </sonar.coverage.exclusions>
         <sonar.sources>src/main/java</sonar.sources>
@@ -110,7 +110,7 @@
                         <version>${jacoco.version}</version>
                         <configuration>
                             <excludes>
-                                <exclude>${sonar.exclusions}</exclude>
+                                <exclude>src/test/**/*</exclude>
                             </excludes>
                         </configuration>
                         <executions>
