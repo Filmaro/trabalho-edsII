@@ -12,6 +12,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.*;
 
+import static java.util.Objects.nonNull;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -39,7 +41,8 @@ public class AlunoEntity {
         this.cursosAdicionados.forEach(x -> cursosAdicionados.put(UUID.fromString(x.getId()), x.convertToCurso()));
 
         List<Nota> notaList = new ArrayList<>();
-        notas.forEach((x, y) -> new Nota(y, UUID.fromString(x)));
+        if (nonNull(notas))
+            notas.forEach((x, y) -> new Nota(y, UUID.fromString(x)));
 
         return Aluno.builder()
                 .cursosAdicionados(cursosAdicionados)
