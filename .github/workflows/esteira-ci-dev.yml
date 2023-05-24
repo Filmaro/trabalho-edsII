@@ -48,13 +48,10 @@ jobs:
           export PATH=$PATH:$(pwd)/sonar-scanner-4.6.2.2472-linux/bin
           sonar-scanner -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORGANIZATION }} -Dsonar.sources=src/main -Dsonar.java.binaries=target/classes -Dsonar.host.url=https://sonarcloud.io
 
-      - name: Install jq
-        run: |
-          sudo apt-get install jq
-
       - name: Checa se passou no SonarCloud Quality Gate do PR
         run: |
           prNumber=${{ github.event.pull_request.number }}
+          prList=$(curl -s -X GET "https://sonarcloud.io/api/project_pull_requests/list?project=$SONAR_PROJECT_KEY")
           echo "$prList"
           status=$(echo "$prList" | jq -r ".pullRequests[] | select(.key | contains(\"$prNumber\"))| .status.qualityGateStatus")
           echo "$status"
