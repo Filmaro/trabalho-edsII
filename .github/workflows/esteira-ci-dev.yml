@@ -52,8 +52,7 @@ jobs:
         run: |
           prNumber=${{ github.event.pull_request.number }}
           prList=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/project_pull_requests/list?project=$SONAR_PROJECT_KEY")
-          pullRequestId=$(echo $prList | jq -r ".pullRequests[] | select(.pullRequestNumber==$prNumber) | .key")
-          status=$(curl -s -u $SONAR_TOKEN: -X GET "https://sonarcloud.io/api/qualitygates/project_status?pullRequest=$pullRequestId" | jq -r '.projectStatus.status')
+          status=$(echo "$prList" | jq -r ".pullRequests[] | select(.key | contains(\"${{ github.event.pull_request.number }}\")) | .status.qualityGateStatus")
           if [[ "$status" != "OK" ]]; then
             echo "Quality Gate failed. Code does not meet the required quality criteria."
             exit 1
