@@ -51,7 +51,8 @@ jobs:
       - name: Checa se passou no SonarCloud Quality Gate do PR
         run: |
           prNumber=${{ github.event.pull_request.number }}
-          prList=$(curl -s -X GET "https://sonarcloud.io/api/project_pull_requests/list?project=$SONAR_PROJECT_KEY")
+          project= ${{ secrets.SONAR_PROJECT_KEY }}
+          prList=$(curl -s -X GET "https://sonarcloud.io/api/project_pull_requests/list?project=$project")
           echo "$prList"
           status=$(echo "$prList" | jq -r ".pullRequests[] | select(.key | contains(\"$prNumber\"))| .status.qualityGateStatus")
           echo "$status"
