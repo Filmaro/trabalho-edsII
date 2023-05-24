@@ -1,7 +1,9 @@
 package filmaro.com.host.dto.request;
 
 import filmaro.com.domain.Nota;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -11,6 +13,8 @@ import java.util.List;
 import java.util.UUID;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class FinalizarCursoRequest {
 
     @NotBlank

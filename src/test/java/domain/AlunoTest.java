@@ -3,6 +3,7 @@ package domain;
 import filmaro.com.domain.Aluno;
 import filmaro.com.domain.Curso;
 import filmaro.com.domain.Nota;
+import filmaro.com.exception.CursosDisnoniveisInvalidosException;
 import filmaro.com.exception.MediaInvalidaException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,20 @@ class AlunoTest {
         Aluno aluno = new Aluno("Claudio", curso);
 
         assertThrows(MediaInvalidaException.class, () -> aluno.finalizarCurso(new Nota(-10, curso.getId())));
+        assertEquals(0, aluno.getQtdCursosDisponiveis());
+    }
+
+    @Test
+    @DisplayName("DADO um aluno sem cursos disponíveis " +
+                 "QUANDO for adicionar cursos " +
+                 "ENTÃO deve ser lançado uma exception de CursosDisnoniveisInvalidosException")
+    void test4() {
+        Curso curso = new Curso("Fisica");
+        Aluno aluno = new Aluno("Claudio", curso);
+
+        assertThrows(CursosDisnoniveisInvalidosException.class, () -> aluno.addCurso(new Curso("Teste")));
+
+        assertEquals(1, aluno.getCursosAdicionados().size());
         assertEquals(0, aluno.getQtdCursosDisponiveis());
     }
 }
