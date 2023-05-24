@@ -8,6 +8,7 @@ import filmaro.com.gateway.repository.entity.AlunoEntity;
 import filmaro.com.gateway.repository.entity.CursoEntity;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -23,6 +24,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -109,11 +112,19 @@ public class EndpointTest {
                         "  ]\n" +
                         "}")).andExpect(status().isNoContent());
 
-        alunoEntity.getCursosAdicionados().add(0, cursoDesejado);
-        alunoEntity.setQtdCursosDisponiveis(2);
-
         verify(alunoRepository).findById(alunoEntity.getId());
         verify(cursoRepository).findById(cursoDesejado.getId());
-        verify(alunoRepository).save(alunoEntity);
+
+        ArgumentCaptor<AlunoEntity> listCaptor = ArgumentCaptor.forClass(AlunoEntity.class);
+        verify(alunoRepository).save(listCaptor.capture());
+        AlunoEntity realAluno = listCaptor.getValue();
+
+        assertTrue(realAluno.getCursosAdicionados().contains(cursoDesejado));
+        assertTrue(realAluno.getCursosAdicionados().contains(cursoFinalizado));
+
+        alunoEntity.setQtdCursosDisponiveis(2);
+        alunoEntity.setCursosAdicionados(null);
+        realAluno.setCursosAdicionados(null);
+        assertEquals(alunoEntity, realAluno);
     }
 }
